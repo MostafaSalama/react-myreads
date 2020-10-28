@@ -1,5 +1,6 @@
 import React from 'react';
 import {getAll} from "../BooksAPI";
+import BookList from "../components/BookList";
 
 class Home extends React.Component {
 	constructor(props) {
@@ -22,12 +23,15 @@ class Home extends React.Component {
 					<div>
 						<div className="bookshelf">
 							<h2 className="bookshelf-title">Currently Reading</h2>
+							<BookList books={this.state.books} shelf='currentlyReading' />
 						</div>
 						<div className="bookshelf">
 							<h2 className="bookshelf-title">Want to Read</h2>
+							<BookList books={this.state.books} shelf='wantToRead' />
 						</div>
 						<div className="bookshelf">
 							<h2 className="bookshelf-title">Read</h2>
+							<BookList books={this.state.books} shelf='read' />
 						</div>
 					</div>
 				</div>
