@@ -1,6 +1,7 @@
 import React from 'react';
 import {getAll} from "../BooksAPI";
 import BookList from "../components/BookList";
+import {Link} from "react-router-dom";
 
 class Home extends React.Component {
 	constructor(props) {
@@ -35,11 +36,13 @@ class Home extends React.Component {
 						</div>
 					</div>
 				</div>
-				<div className="open-search">
-					<button onClick={() => this.setState({showSearchPage: true})}>
-						Add a book
-					</button>
-				</div>
+				<Link to={'/search'}>
+					<div className="open-search">
+						<button>
+							Add a book
+						</button>
+					</div>
+				</Link>
 			</div>
 		);
 	}
