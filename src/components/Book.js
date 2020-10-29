@@ -49,4 +49,7 @@ Book.propTypes = {
     shelf:PropTypes.string,
     thumbnail:PropTypes.string
 };
+Book.defaultProps = {
+	authors : []
+}
 export default Book;
