@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 function Book({title,id,shelf,authors,thumbnail}) {
+    console.log(shelf);
 	return (
 		<div className="book">
 			<div className="book-top">
@@ -26,7 +27,7 @@ function Book({title,id,shelf,authors,thumbnail}) {
 			</div>
 			<div className="book-title">{title}</div>
 			<div className="book-authors">
-                {authors.map(author=><span>{author} <br/></span>)}
+                {authors.map(author=><span key={author}>{author} <br/></span>)}
             </div>
 		</div>
 	);
