@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import BookList from "../components/BookList";
-import {search} from "../BooksAPI";
+import {search, update} from "../BooksAPI";
 
 class Search extends React.Component {
 	constructor(props) {
@@ -20,6 +20,15 @@ class Search extends React.Component {
 			}
 		}).catch(err=>{
 			console.log(err) ;
+		})
+	}
+	onUpdateBookShelf = ({id},shelf)=> {
+		update({id},shelf).then(res=>{
+			this.setState(prevState=>{
+				return {books:prevState.books.map(book=>{
+						return book.id === id ? {...book,shelf} : book;
+					})}
+			})
 		})
 	}
 	render() {
@@ -49,7 +58,7 @@ class Search extends React.Component {
 					</div>
 				</div>
 				<div className="search-books-results">
-					<BookList shelf={'all'} books={books}/>
+					<BookList onUpdateBookShelf={this.onUpdateBookShelf} shelf={'all'} books={books}/>
 				</div>
 			</div>
 		);

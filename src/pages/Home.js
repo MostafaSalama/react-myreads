@@ -1,5 +1,5 @@
 import React from 'react';
-import {getAll} from "../BooksAPI";
+import {getAll, update} from "../BooksAPI";
 import BookList from "../components/BookList";
 import {Link} from "react-router-dom";
 
@@ -13,6 +13,15 @@ class Home extends React.Component {
 			this.setState({books})
 		})
 	}
+	onUpdateBookShelf = ({id},shelf)=> {
+		update({id},shelf).then(res=>{
+			this.setState(prevState=>{
+				return {books:prevState.books.map(book=>{
+					return book.id === id ? {...book,shelf} : book;
+					})}
+			})
+		})
+	}
 
 	render() {
 		return (
@@ -24,15 +33,15 @@ class Home extends React.Component {
 					<div>
 						<div className="bookshelf">
 							<h2 className="bookshelf-title">Currently Reading</h2>
-							<BookList books={this.state.books} shelf='currentlyReading' />
+							<BookList onUpdateBookShelf={this.onUpdateBookShelf}  books={this.state.books} shelf='currentlyReading' />
 						</div>
 						<div className="bookshelf">
 							<h2 className="bookshelf-title">Want to Read</h2>
-							<BookList books={this.state.books} shelf='wantToRead' />
+							<BookList onUpdateBookShelf={this.onUpdateBookShelf}  books={this.state.books} shelf='wantToRead' />
 						</div>
 						<div className="bookshelf">
 							<h2 className="bookshelf-title">Read</h2>
-							<BookList books={this.state.books} shelf='read' />
+							<BookList onUpdateBookShelf={this.onUpdateBookShelf} books={this.state.books} shelf='read' />
 						</div>
 					</div>
 				</div>
