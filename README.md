@@ -1,4 +1,20 @@
-# MyReads Project
+# About the project
+This is a virtual bookcase to keep track the books you're reading or currently reading or read.
+
+URL https://react-my-reads-76650.web.app/
+## Features
++ user can add books to a specific bookshelf (Currently Reading, Want to Read, Read)
++ user can move books from any bookshelf to any bookshelf the user wants.
++ user can search books from an API and get the result based on the query string.
++ user can add the books he/she searched for to any bookshelf he/she wants.
+
+## Getting Started 
++ to see the project live visit https://react-my-reads-76650.web.app/
++ to run the project locally 
+    + run `npm i` or `yarn` 
+    + run `npm start` or `yarn run start`
+    + to build `npm run build` or `yarn run build`
+## MyReads Project
 
 This is the starter template for the final assessment project for Udacity's React Fundamentals course. The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. If you choose to start with this template, your job will be to add interactivity to the app by refactoring the static code in this template.
 
