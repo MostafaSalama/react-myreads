@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 function Book({title,id,shelf,authors,thumbnail}) {
-    console.log(shelf);
+    const shelves = [
+        {value:'currentlyReading',text:'Currently Reading'},
+        {value : 'wantToRead', text: 'Want to Read'},
+        {value:'read',text:'Read'},
+        {value:'none',text:'None'}
+    ];
 	return (
 		<div className="book">
 			<div className="book-top">
@@ -18,10 +23,15 @@ function Book({title,id,shelf,authors,thumbnail}) {
 						<option value="move" disabled>
 							Move to...
 						</option>
-						<option value="currentlyReading">Currently Reading</option>
-						<option value="wantToRead">Want to Read</option>
-						<option value="read">Read</option>
-						<option value="none">None</option>
+                        {
+                            shelves.map(currentShelf=> {
+                                return (
+                                    <option key={currentShelf.value} value={currentShelf.value}>
+                                        {currentShelf.value ===shelf? `✔ ${currentShelf.text}`:currentShelf.text}
+                                    </option>
+                                )
+                            })
+                        }
 					</select>
 				</div>
 			</div>

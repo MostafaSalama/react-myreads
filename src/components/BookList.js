@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Book from './Book';
 function BookList({ books, shelf }) {
 	const currentBooks = books.filter((book) => book.shelf === shelf);
-	console.log(currentBooks);
 	return (
 		<div className="bookshelf-books">
 			<ol className="books-grid">
