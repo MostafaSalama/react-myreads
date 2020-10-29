@@ -1,50 +1,60 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import BookList from "../components/BookList";
-import {getAll, search, update} from "../BooksAPI";
+import BookList from '../components/BookList';
+import { getAll, search, update } from '../BooksAPI';
 
 class Search extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { query: '', books: [],allBooks:[] };
+		this.state = { query: '', books: [], allBooks: [] };
 	}
-	componentDidMount(){
-		getAll().then(allBooks=>{
-			this.setState({allBooks})
-		})
+	componentDidMount() {
+		getAll().then((allBooks) => {
+			this.setState({ allBooks });
+		});
 	}
-	onChangeHandler = (e)=>{
-		this.setState({query:e.target.value},this.updateBooks) ;
-	}
-	updateBooks(){
-		const {query,allBooks} = this.state ;
-		search(query).then(res=>{
-			if(res.error) {
-				this.setState({books:[]});
-				return ;
-			}
-			if(res.length){
-				let  books = res.filter(res=>res.imageLinks).map((book,index)=>{
-					const bookInAllBooks = allBooks.find(currentBook=> currentBook.id === book.id) ;
-					return bookInAllBooks ? bookInAllBooks : {...book,shelf:'none'} ;
-				});
-			this.setState({books}) ;
-			}
-		}).catch(err=>{
-			this.setState({books:[]});
-		})
-	}
-	onUpdateBookShelf = ({id},shelf)=> {
-		update({id},shelf).then(res=>{
-			this.setState(prevState=>{
-				return {books:prevState.books.map(book=>{
-						return book.id === id ? {...book,shelf} : book;
-					})}
+	onChangeHandler = (e) => {
+		this.setState({ query: e.target.value }, this.updateBooks);
+	};
+	updateBooks() {
+		const { query, allBooks } = this.state;
+		search(query)
+			.then((res) => {
+				if (res.error) {
+					this.setState({ books: [] });
+					return;
+				}
+				if (res.length) {
+					let books = res
+						.filter((res) => res.imageLinks)
+						.map((book, index) => {
+							const bookInAllBooks = allBooks.find(
+								(currentBook) => currentBook.id === book.id,
+							);
+							return bookInAllBooks
+								? bookInAllBooks
+								: { ...book, shelf: 'none' };
+						});
+					this.setState({ books });
+				}
 			})
-		})
+			.catch((err) => {
+				this.setState({ books: [] });
+			});
 	}
+	onUpdateBookShelf = ({ id }, shelf) => {
+		update({ id }, shelf).then((res) => {
+			this.setState((prevState) => {
+				return {
+					books: prevState.books.map((book) => {
+						return book.id === id ? { ...book, shelf } : book;
+					}),
+				};
+			});
+		});
+	};
 	render() {
-		const {query,books} = this.state ;
+		const { query, books } = this.state;
 		return (
 			<div className="search-books">
 				<div className="search-books-bar">
@@ -70,7 +80,11 @@ class Search extends React.Component {
 					</div>
 				</div>
 				<div className="search-books-results">
-					<BookList onUpdateBookShelf={this.onUpdateBookShelf} shelf={'all'} books={books}/>
+					<BookList
+						onUpdateBookShelf={this.onUpdateBookShelf}
+						shelf={'all'}
+						books={books}
+					/>
 				</div>
 			</div>
 		);

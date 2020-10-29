@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import Home from "./pages/Home";
-import Search from "./pages/Search";
-import {Route} from "react-router-dom";
+import Home from './pages/Home';
+import Search from './pages/Search';
+import { Route } from 'react-router-dom';
 
 class BooksApp extends React.Component {
 	state = {
@@ -18,14 +18,14 @@ class BooksApp extends React.Component {
 	render() {
 		return (
 			<div className="app">
-				<Route path='/' exact>
-					<Home/>
+				<Route path="/" exact>
+					<Home />
 				</Route>
-				<Route path='/search'>
-					<Search/>
+				<Route path="/search">
+					<Search />
 				</Route>
 			</div>
-         /*   <div>
+			/*   <div>
               <BookFetch/>
             </div>*/
 		);
