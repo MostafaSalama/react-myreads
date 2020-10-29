@@ -2,20 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Book from './Book';
 function BookList({ books, shelf }) {
-	const currentBooks = books.filter((book) => book.shelf === shelf);
+	let currentBooks = books.filter((book) => book.shelf === shelf);
+	if (shelf === 'all') {
+		currentBooks = [...books] ;
+	}
 	return (
 		<div className="bookshelf-books">
 			<ol className="books-grid">
-				{books
-					.filter((book) => book.shelf === shelf)
+				{currentBooks
 					.map((book) => (
 						<li key={book.id}>
 							<Book
 								id={book.id}
 								title={book.title}
 								thumbnail={book.imageLinks.thumbnail}
-                                authors={book.authors}
-                                shelf={shelf}
+								authors={book.authors}
+								shelf={shelf}
 							/>
 						</li>
 					))}
